@@ -1,5 +1,5 @@
 # jendobson.greenbutton
-Python tools for working with green button data.
+Python tools for working with [Green Button] (http://www.greenbuttondata.org) data.
 
 To Use:
 Run or import the script greenbutton.py.
