@@ -1,4 +1,4 @@
-# pygb
+# jendobson.greenbutton
 Python tools for working with green button data.
 
 To Use:
