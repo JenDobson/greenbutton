@@ -2,7 +2,14 @@
 Python tools for working with [Green Button](http://www.greenbuttondata.org "The Green Button") data.
 
 To Use:
-Run or import the script greenbutton.py.
+
+```python
+# Import the script greenbutton.py
+import greenbutton.greenbutton as gb
+
+# View the dataframe
+gb.df
+```
 
 See also:
 * https://github.com/GreenButtonAlliance/hpxml
