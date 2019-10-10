@@ -20,9 +20,9 @@ setuptools.setup(
         "Development Status :: 3 - Alpha",
     ],
     install_requires=[
-        'xmlschema',
-        'pandas',
-        'matplotlib',
+        'xmlschema>=1.0',
+        'pandas>=0.25',
+        'matplotlib>=3.1',
     ],
     python_requires='>=3.7',
     keywords='greenbutton energy',

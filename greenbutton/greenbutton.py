@@ -70,6 +70,8 @@ for interval_block in interval_blocks:
  
 df = pd.DataFrame(readings,columns=['Start Time','Duration','Watts'])
 
+SAMPLE_DATA = df
+
 print(df)
 
 df_night_use = filter_by_time_of_day(df,datetime.time(23,0),datetime.time(5,0))
