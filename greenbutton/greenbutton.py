@@ -82,11 +82,6 @@ def watts_by_use_hour(df):
 def group_by_use_hour_from_df(df):    
     s = watts_by_use_hour(df)
     return s.groupby(level=0)
-
-
-
-def bin_use_by_time_of_day(df):
-    pass
     
 def boxplot_use_by_hour(df):
     df_to_plot = df.copy()
@@ -94,24 +89,22 @@ def boxplot_use_by_hour(df):
     return df_to_plot.boxplot('kWh','Start Hour')
     
     
-tree = ET.parse(XMLFILE)
-root = tree.getroot()
+def dataframe_from_xml(xmlfile):
+    tree = ET.parse(XMLFILE)
+    root = tree.getroot()
 
-interval_blocks = get_interval_blocks(root)
+    interval_blocks = get_interval_blocks(root)
 
-readings = []
+    readings = []
 
-for interval_block in interval_blocks:
-    for interval_reading in get_interval_readings(interval_block):
-        readings.append(parse_reading(interval_reading))
+    for interval_block in interval_blocks:
+        for interval_reading in get_interval_readings(interval_block):
+            readings.append(parse_reading(interval_reading))
  
-df = pd.DataFrame(readings,columns=['Start Time','Duration','kWh'])
+    return pd.DataFrame(readings,columns=['Start Time','Duration','kWh'])
+    
 
 
-SAMPLE_DATA = df
 
-print(df)
-
-df_night_use = filter_by_time_of_day(df,datetime.time(23,0),datetime.time(5,0))
-
+SAMPLE_DATA = dataframe_from_xml(XMLFILE)
 

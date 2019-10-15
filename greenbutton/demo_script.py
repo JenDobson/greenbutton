@@ -4,9 +4,10 @@ import matplotlib.pyplot as plt
 
 
 
-plt.plot(gb.SAMPLE_DATA.Watts)
+plt.plot(gb.SAMPLE_DATA.kWh)
 plt.show()
 
+df = gb.SAMPLE_DATA
 
 df_night_use = filter_by_time_of_day(df,datetime.time(23,0),datetime.time(5,0))
 
