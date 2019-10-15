@@ -4,6 +4,7 @@ import datetime
 import xml.etree.ElementTree as ET
 import pandas as pd
 import matplotlib.pyplot as plt
+import numpy as np
 import os 
 
 import pdb
@@ -56,6 +57,42 @@ def filter_by_time_of_day(df,starttime, stoptime):
         df2 = df[df['Start Time'].map(lambda x: x.time() >= starttime) & df['Start Time'].map(lambda x: x.time() <= stoptime)]
     return df2
     
+# From https://stackoverflow.com/questions/13108635/how-to-get-time-of-day-for-each-element-in-a-datetime64-array
+def start_day(start_time):
+    return start_time.astype('datetime64[D]').astype(start_time.dtype)
+    
+def start_hour(start_time,start_day):
+    return (start_time-start_day)/np.timedelta64(1,'h')
+
+def start_time_from_df(df):
+    return df['Start Time']
+
+def start_hour_from_df(df):
+    start_time = start_time_from_df(df)
+    start_day = start_day_from_df(df)
+    return np.floor(start_hour(start_time,start_day))
+    
+def start_day_from_df(df):
+    start_time = start_time_from_df(df)
+    return start_day(start_time)
+
+def watts_by_use_hour(df):
+    return pd.Series(df['Watts'],start_hour_from_df(df))
+    
+def group_by_use_hour_from_df(df):    
+    s = watts_by_use_hour(df)
+    return s.groupby(level=0)
+
+
+
+def bin_use_by_time_of_day(df):
+    pass
+    
+def boxplot_use_by_hour(df):
+    df_to_plot = df.copy()
+    df_to_plot['Start Hour'] = start_hour_from_df(df)
+    return df_to_plot.boxplot('Watts','Start Hour')
+    
     
 tree = ET.parse(XMLFILE)
 root = tree.getroot()
@@ -70,6 +107,7 @@ for interval_block in interval_blocks:
  
 df = pd.DataFrame(readings,columns=['Start Time','Duration','Watts'])
 
+
 SAMPLE_DATA = df
 
 print(df)
@@ -79,3 +117,8 @@ df_night_use = filter_by_time_of_day(df,datetime.time(23,0),datetime.time(5,0))
 
 # Plot use per night 11pm to 5am
 df_night_use_by_day = df_night_use.groupby(lambda x: df_night_use['Start Time'].loc[x].date()).sum()
+
+plt.plot(df_night_use_by_day.Watts)
+plt.show(block=False)
+
+import pdb; pdb.set_trace
