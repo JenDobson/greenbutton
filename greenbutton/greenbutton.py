@@ -105,7 +105,7 @@ for interval_block in interval_blocks:
     for interval_reading in get_interval_readings(interval_block):
         readings.append(parse_reading(interval_reading))
  
-df = pd.DataFrame(readings,columns=['Start Time','Duration','Watts'])
+df = pd.DataFrame(readings,columns=['Start Time','Duration','kWh'])
 
 
 SAMPLE_DATA = df
@@ -115,10 +115,3 @@ print(df)
 df_night_use = filter_by_time_of_day(df,datetime.time(23,0),datetime.time(5,0))
 
 
-# Plot use per night 11pm to 5am
-df_night_use_by_day = df_night_use.groupby(lambda x: df_night_use['Start Time'].loc[x].date()).sum()
-
-plt.plot(df_night_use_by_day.Watts)
-plt.show(block=False)
-
-import pdb; pdb.set_trace
