@@ -91,7 +91,7 @@ def bin_use_by_time_of_day(df):
 def boxplot_use_by_hour(df):
     df_to_plot = df.copy()
     df_to_plot['Start Hour'] = start_hour_from_df(df)
-    return df_to_plot.boxplot('Watts','Start Hour')
+    return df_to_plot.boxplot('kWh','Start Hour')
     
     
 tree = ET.parse(XMLFILE)
