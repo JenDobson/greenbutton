@@ -1,15 +1,7 @@
 # jendobson.greenbutton
 Python tools for working with [Green Button](http://www.greenbuttondata.org "The Green Button") data.
 
-To Use:
-
-```python
-# Import the script greenbutton.py
-import greenbutton.greenbutton as gb
-
-# View the dataframe
-gb.df
-```
+See demo_script.py for usage.
 
 See also:
 * https://github.com/GreenButtonAlliance/hpxml
