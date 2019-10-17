@@ -1,6 +1,6 @@
 """Parse GreenButton XML (within zipfile)"""
 
-import datetimeWh
+import datetime
 import xml.etree.ElementTree as ET
 import pandas as pd
 import matplotlib.pyplot as plt
