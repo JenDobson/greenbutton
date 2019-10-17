@@ -5,7 +5,7 @@ with open("README.md","r") as fh:
     
 setuptools.setup(
     name="jendobson.greenbutton",
-    version="0.0.1",
+    version="0.0.2-c1",
     author="Jen Dobson",
     author_email="jendobson@gmail.com",
     description="Python tools to explore GreenButton data.",
