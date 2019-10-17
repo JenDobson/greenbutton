@@ -1,6 +1,6 @@
 """Parse GreenButton XML (within zipfile)"""
 
-import datetime
+import datetimeWh
 import xml.etree.ElementTree as ET
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -13,7 +13,7 @@ import pdb
 package_directory = os.path.dirname(os.path.abspath(__file__))
 
 INTERVAL = "./content/IntervalBlock/IntervalReading"
-XMLFILE = os.path.join(package_directory, 'sample_data', 'SDGEElectricIntervalDataFeb12011toJan312012.xml')
+XMLFILE = os.path.join(package_directory, 'sample_data', 'sample_data.xml')
 
 ns = {'default': 'http://www.w3.org/2005/Atom',
     'reading': 'http://naesb.org/espi'}
@@ -86,7 +86,7 @@ def group_by_use_hour_from_df(df):
 def boxplot_use_by_hour(df):
     df_to_plot = df.copy()
     df_to_plot['Start Hour'] = start_hour_from_df(df)
-    return df_to_plot.boxplot('kWh','Start Hour')
+    return df_to_plot.boxplot('Wh','Start Hour')
     
     
 def dataframe_from_xml(xmlfile):
@@ -101,7 +101,7 @@ def dataframe_from_xml(xmlfile):
         for interval_reading in get_interval_readings(interval_block):
             readings.append(parse_reading(interval_reading))
  
-    return pd.DataFrame(readings,columns=['Start Time','Duration','kWh'])
+    return pd.DataFrame(readings,columns=['Start Time','Duration','Wh'])
     
 
 
