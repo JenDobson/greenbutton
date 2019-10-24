@@ -5,6 +5,9 @@ import greenbutton.greenbutton as gb
 import pandas as pd
 import numpy as np
 import datetime
+import os
+
+THISDIR = os.path.dirname(os.path.abspath(__file__))
 
 class TestStringMethods(unittest.TestCase):
     
@@ -24,6 +27,12 @@ class TestStringMethods(unittest.TestCase):
         self.assertTrue(np.isin(datetime.time(8,0),unique_filtered_df))
         self.assertTrue(np.isin(datetime.time(9,0),unique_filtered_df))
         self.assertTrue(2,len(unique_filtered_df))
+    
+    def test_can_load_data_from_file(self):
+        # Check that loaded data is not just from hardcoded XMLFILE
+        datafile = os.path.join(THISDIR,'data','testdata.xml')
+        df = gb.dataframe_from_xml(datafile)
+        self.assertEqual(pd.Timestamp(2019,10,1,0),df.loc[0]['Start Time'])
         
     def test_aggregate_use_by_day(self):
         pass

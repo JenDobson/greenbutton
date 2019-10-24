@@ -90,7 +90,7 @@ def boxplot_use_by_hour(df):
     
     
 def dataframe_from_xml(xmlfile):
-    tree = ET.parse(XMLFILE)
+    tree = ET.parse(xmlfile)
     root = tree.getroot()
 
     interval_blocks = get_interval_blocks(root)
